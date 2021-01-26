@@ -2,9 +2,12 @@ package superr
 
 import (
 	"github.com/jimlawless/whereami"
-	"github.com/sirupsen/logrus"
-	"log"
+	log "github.com/sirupsen/logrus"
 )
+
+func init() {
+	log.SetFormatter(&log.JSONFormatter{})
+}
 
 type Op string
 type Kind string
@@ -30,17 +33,14 @@ type Error struct {
 	Err error
 
 	// Metadata
-	Severity logrus.Level
+	Severity log.Level
 	Caller   string
 }
 
 func E(args ...interface{}) error {
-	log.Println("CALL1", whereami.WhereAmI(1))
-	log.Println("CALL2", whereami.WhereAmI(2))
-	log.Println("CALL3", whereami.WhereAmI(3))
 	e := &Error{}
 
-	e.Caller = whereami.WhereAmI(1)
+	e.Caller = whereami.WhereAmI(2)
 
 	for _, arg := range args {
 		switch arg := arg.(type) {
@@ -57,6 +57,24 @@ func E(args ...interface{}) error {
 		}
 	}
 	return e
+}
+
+func Log(e error) {
+
+	superError, ok := e.(*Error)
+	if !ok {
+		log.Error(e)
+		return
+	}
+
+	entry := log.WithFields(log.Fields{
+		"stackTrace": Ops(superError),
+	})
+
+	switch superError.Severity {
+	default:
+		entry.Info(superError.Message)
+	}
 }
 
 // Ops returns the "stack" of operations
