@@ -69,6 +69,7 @@ func Log(e error) {
 
 	entry := log.WithFields(log.Fields{
 		"stackTrace": Ops(superError),
+		"caller":     Caller(superError),
 	})
 
 	switch superError.Severity {
@@ -88,6 +89,21 @@ func Ops(e *Error) []Op {
 	}
 
 	res = append(res, Ops(subErr)...)
+	return res
+}
+
+func Caller(e *Error) string {
+	return e.Caller
+}
+
+func Callers(e *Error) []string {
+	res := []string{}
+	subErr, ok := e.Err.(*Error)
+	if !ok {
+		return res
+	}
+
+	res = append(res, Callers(subErr)...)
 	return res
 }
 
