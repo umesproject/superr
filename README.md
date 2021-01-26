@@ -1,0 +1,2 @@
+# superr
+Golang error lib
