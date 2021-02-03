@@ -5,8 +5,8 @@ Superr is a structured error library for golang.
 It was inspirated by: https://middlemost.com/failure-is-your-domain/
 
 ### Getting started
-Add 
-`go get github.com/umesproject/superr`
+ 
+ g`go get github.com/umesproject/superr`
 
 ### Example 1
 
