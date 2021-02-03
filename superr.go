@@ -9,28 +9,30 @@ func init() {
 	log.SetFormatter(&log.JSONFormatter{})
 }
 
+// Op stands for Operation. Is a unique string describing a method or a function
 type Op string
-type Kind string
+
+// Kind groups all errors into smaller categories
+// Can be predefined codes ( like http / gRPC )
+type Kind uint32
+
+// Message is a Human-readable message.
 type Message string
 
-// Application error codes
-const (
-	ECONFLICT Kind = "conflict"  // action cannot be performed
-	EINTERNAL      = "internal"  // internal error
-	EINVALID       = "invalid"   // validation failed
-	ENOTFOUND      = "not_found" // entity does not exist
-)
+// Field is used for passing extra data to the error ( like variables content usefull for debug  and query on log )
+type Fields map[string]interface{}
 
 type Error struct {
 	// Machine-readable error code.
 	Kind Kind // code of error: like conflict, invaild, not_found etc
 
-	// Human-readable message.
 	Message Message
 
 	// Logical operation and nested error.
-	Op  Op // Operation is a unique string describing a method or a function
+	Op  Op
 	Err error
+
+	ExtraFields Fields // Extra fields useful for logging
 
 	// Metadata
 	Severity log.Level
@@ -52,6 +54,8 @@ func E(args ...interface{}) error {
 			e.Err = arg
 		case Kind:
 			e.Kind = arg
+		case Fields:
+			e.ExtraFields = arg
 		default:
 			panic("bad call to serros.")
 		}
@@ -60,22 +64,40 @@ func E(args ...interface{}) error {
 }
 
 func Log(e error) {
-
 	superError, ok := e.(*Error)
 	if !ok {
 		log.Error(e)
 		return
 	}
 
-	entry := log.WithFields(log.Fields{
+	fields := log.Fields{
 		"stackTrace": Ops(superError),
 		"caller":     Caller(superError),
-	})
+	}
+
+	// Get fields from first error
+	/*	for fieldName, fieldValue := range getFields(superError) {
+		fields[fieldName] = fieldValue
+	}*/
+
+	fields["extraFields"] = getFields(superError)
+
+	entry := log.WithFields(fields)
 
 	switch superError.Severity {
 	default:
 		entry.Info(superError.Message)
 	}
+}
+
+// Fields return the extra fields added to the error
+func getFields(e *Error) Fields {
+	subErr, ok := e.Err.(*Error)
+	if !ok {
+		return e.ExtraFields
+	}
+
+	return getFields(subErr)
 }
 
 // Ops returns the "stack" of operations
@@ -92,6 +114,20 @@ func Ops(e *Error) []Op {
 	return res
 }
 
+// ErrorCode returns the error code associated with the error
+func ErrorCode(err error) Kind {
+	e, ok := err.(*Error)
+	if !ok {
+		return 0
+	}
+
+	if e.Kind != 0 {
+		return e.Kind
+	}
+
+	return ErrorCode(e.Err)
+}
+
 func Caller(e *Error) string {
 	return e.Caller
 }
@@ -105,17 +141,6 @@ func Callers(e *Error) []string {
 
 	res = append(res, Callers(subErr)...)
 	return res
-}
-
-func ErrorCode(err error) string {
-	if err == nil {
-		return ""
-	} else if e, ok := err.(*Error); ok && e.Kind != "" {
-		return string(e.Kind)
-	} else if ok && e.Err != nil {
-		return ErrorCode(e.Err)
-	}
-	return EINTERNAL
 }
 
 func (e *Error) Error() string {
