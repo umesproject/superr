@@ -1,6 +1,7 @@
 package superr
 
 import (
+	"fmt"
 	"github.com/jimlawless/whereami"
 	log "github.com/sirupsen/logrus"
 )
@@ -57,7 +58,7 @@ func E(args ...interface{}) error {
 		case Fields:
 			e.ExtraFields = arg
 		default:
-			panic("bad call to serros.")
+			panic(fmt.Sprintf("bad call to superr.E: not recognised type %v", arg))
 		}
 	}
 	return e
