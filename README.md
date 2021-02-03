@@ -6,7 +6,7 @@ It was inspirated by: https://middlemost.com/failure-is-your-domain/
 
 ### Getting started
  
- g`go get github.com/umesproject/superr`
+`go get github.com/umesproject/superr`
 
 ### Example 1
 
