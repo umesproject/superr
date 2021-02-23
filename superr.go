@@ -2,12 +2,15 @@ package superr
 
 import (
 	"fmt"
+
 	"github.com/jimlawless/whereami"
 	log "github.com/sirupsen/logrus"
+	logrusgce "github.com/znly/logrus-gce"
 )
 
 func init() {
-	log.SetFormatter(&log.JSONFormatter{})
+	log.SetFormatter(logrusgce.NewGCEFormatter(true))
+
 }
 
 // Op stands for Operation. Is a unique string describing a method or a function
