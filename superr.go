@@ -5,11 +5,10 @@ import (
 
 	"github.com/jimlawless/whereami"
 	log "github.com/sirupsen/logrus"
-	logrusgce "github.com/znly/logrus-gce"
 )
 
 func init() {
-	log.SetFormatter(logrusgce.NewGCEFormatter(true))
+	log.SetFormatter(NewGCEFormatter(true))
 
 }
 
