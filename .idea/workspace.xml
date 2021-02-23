@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -21,7 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2ca3e8b7-1e8e-4c19-a9c4-37820e27db80" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/superr.go" beforeDir="false" afterPath="$PROJECT_DIR$/superr.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +82,10 @@
       <updated>1611670898329</updated>
       <workItem from="1611670899408" duration="5068000" />
       <workItem from="1611735951967" duration="3043000" />
-      <workItem from="1612368161520" duration="3652000" />
+      <workItem from="1612368161520" duration="4476000" />
+      <workItem from="1612439163614" duration="25000" />
+      <workItem from="1612439555395" duration="14282000" />
+      <workItem from="1612786498229" duration="6000" />
     </task>
     <servers />
   </component>
@@ -110,5 +115,9 @@
       <screen x="-180" y="-1440" width="3440" height="1440" />
     </state>
     <state x="1340" y="-880" key="#Go_Modules/-180.-1440.3440.1440/0.0.2048.1280@-180.-1440.3440.1440" timestamp="1611671241347" />
+    <state x="345" y="-1092" width="670" height="676" key="search.everywhere.popup" timestamp="1612521380174">
+      <screen x="-180" y="-1417" width="3440" height="1417" />
+    </state>
+    <state x="345" y="-1092" width="670" height="676" key="search.everywhere.popup/-180.-1417.3440.1417/0.23.2048.1257@-180.-1417.3440.1417" timestamp="1612521380174" />
   </component>
 </project>
