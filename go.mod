@@ -1,4 +1,4 @@
-module github.com/umesproject/super
+module github.com/umesproject/superr
 
 go 1.15
 
