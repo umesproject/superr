@@ -150,7 +150,7 @@ func Log(e error) {
 
 	fields = append(fields, zap.Any("extraFields", getFields(superError)))
 
-	entry := istance.With(fields...)
+	entry := istance.With(fields...).WithOptions(zap.WithCaller(false))
 
 	errorMessage := string(superError.Message)
 	switch superError.Severity {

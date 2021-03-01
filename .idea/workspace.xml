@@ -24,9 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2ca3e8b7-1e8e-4c19-a9c4-37820e27db80" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gce_hook.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/superr.go" beforeDir="false" afterPath="$PROJECT_DIR$/superr.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +87,7 @@
       <workItem from="1612439163614" duration="25000" />
       <workItem from="1612439555395" duration="14282000" />
       <workItem from="1612786498229" duration="6000" />
-      <workItem from="1614608785375" duration="1907000" />
+      <workItem from="1614608785375" duration="2587000" />
     </task>
     <servers />
   </component>
