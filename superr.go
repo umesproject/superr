@@ -2,15 +2,11 @@ package superr
 
 import (
 	"fmt"
-
 	"github.com/jimlawless/whereami"
 	log "github.com/sirupsen/logrus"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
-
-func init() {
-	log.SetFormatter(NewGCEFormatter(true))
-
-}
 
 // Op stands for Operation. Is a unique string describing a method or a function
 type Op string
@@ -25,6 +21,67 @@ type Message string
 // Field is used for passing extra data to the error ( like variables content usefull for debug  and query on log )
 type Fields map[string]interface{}
 
+var istance *zap.Logger
+
+type Severity int8
+type logLevel int8
+
+const (
+	InfoLevel logLevel = iota
+	DebugLevel
+	ErrorLevel
+)
+
+const (
+	SeverityDebug Severity = iota
+	SeverityInfo
+	SeverityError
+)
+
+func init() {
+	Init(InfoLevel)
+}
+
+func Init(level logLevel) {
+
+	choosedLevel := zap.InfoLevel
+
+	switch level {
+	case DebugLevel:
+		choosedLevel = zap.DebugLevel
+		break
+	case ErrorLevel:
+		choosedLevel = zap.ErrorLevel
+		break
+	}
+
+	cfg := zap.Config{
+		Encoding:         "json",
+		Level:            zap.NewAtomicLevelAt(choosedLevel),
+		OutputPaths:      []string{"stdout"},
+		ErrorOutputPaths: []string{"stderr"},
+		EncoderConfig: zapcore.EncoderConfig{
+			MessageKey: "message",
+
+			LevelKey:    "severity",
+			EncodeLevel: zapcore.CapitalLevelEncoder,
+
+			TimeKey:    "timestamp",
+			EncodeTime: zapcore.ISO8601TimeEncoder,
+
+			CallerKey:    "caller",
+			EncodeCaller: zapcore.ShortCallerEncoder,
+		},
+	}
+
+	ist, err := cfg.Build()
+	if err != nil {
+		panic(err)
+	}
+
+	istance = ist
+}
+
 type Error struct {
 	// Machine-readable error code.
 	Kind Kind // code of error: like conflict, invaild, not_found etc
@@ -38,7 +95,7 @@ type Error struct {
 	ExtraFields Fields // Extra fields useful for logging
 
 	// Metadata
-	Severity log.Level
+	Severity Severity
 	Caller   string
 }
 
@@ -66,6 +123,12 @@ func E(args ...interface{}) error {
 	return e
 }
 
+func ErrorWithLog(args ...interface{}) error {
+	e := E(args...)
+	Log(e)
+	return e
+}
+
 func Log(e error) {
 	superError, ok := e.(*Error)
 	if !ok {
@@ -73,24 +136,31 @@ func Log(e error) {
 		return
 	}
 
-	fields := log.Fields{
-		"stackTrace": Ops(superError),
-		"caller":     Caller(superError),
-	}
+	fields := []zap.Field{
+		zap.Any("stackTrace", Ops(superError)),
+		zap.Any("caller", Caller(superError))}
 
 	// Get fields from first error
 	/*	for fieldName, fieldValue := range getFields(superError) {
 		fields[fieldName] = fieldValue
 	}*/
 
-	fields["extraFields"] = getFields(superError)
+	fields = append(fields, zap.Any("extraFields", getFields(superError)))
 
-	entry := log.WithFields(fields)
+	entry := istance.With(fields...)
 
+	errorMessage := string(superError.Message)
 	switch superError.Severity {
+	case SeverityDebug:
+		entry.Debug(errorMessage)
+		break
+	case SeverityError:
+		entry.Error(errorMessage)
 	default:
-		entry.Info(superError.Message)
+		entry.Info(string(superError.Message))
+		break
 	}
+
 }
 
 // Fields return the extra fields added to the error

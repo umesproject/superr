@@ -108,7 +108,7 @@ func (f *GCEFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 
 	data["time"] = entry.Time.Format(time.RFC3339Nano)
 	data["severity"] = levelsLogrusToGCE[entry.Level]
-	data["logMessage"] = entry.Message
+	data["textPayload"] = entry.Message
 
 	if f.withSourceInfo == true {
 		skip, err := getSkipLevel(entry.Level)
