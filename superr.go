@@ -103,6 +103,7 @@ func E(args ...interface{}) error {
 	e := &Error{}
 
 	e.Caller = whereami.WhereAmI(2)
+	e.Severity = SeverityInfo
 
 	for _, arg := range args {
 		switch arg := arg.(type) {
@@ -116,6 +117,8 @@ func E(args ...interface{}) error {
 			e.Kind = arg
 		case Fields:
 			e.ExtraFields = arg
+		case Severity:
+			e.Severity = arg
 		default:
 			panic(fmt.Sprintf("bad call to superr.E: not recognised type %v", arg))
 		}
