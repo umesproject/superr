@@ -140,6 +140,7 @@ func Log(e error) {
 	}
 
 	fields := []zap.Field{
+		zap.Any("error", firstError(superError)),
 		zap.Any("stackTrace", Ops(superError)),
 		zap.Any("caller", Caller(superError))}
 
@@ -202,6 +203,17 @@ func ErrorCode(err error) Kind {
 	}
 
 	return ErrorCode(e.Err)
+}
+
+// Ops returns the "stack" of operations
+// for each generated error
+func firstError(e *Error) error {
+	subErr, ok := e.Err.(*Error)
+	if !ok {
+		return e.Err
+	}
+
+	return firstError(subErr)
 }
 
 func Caller(e *Error) string {
