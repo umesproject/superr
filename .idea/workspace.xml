@@ -38,7 +38,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="/usr/local/Cellar/go/1.15/libexec" />
+  <component name="GOROOT" path="/usr/local/Cellar/go/1.16.3/libexec" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -88,7 +88,8 @@
       <workItem from="1612439555395" duration="14282000" />
       <workItem from="1612786498229" duration="6000" />
       <workItem from="1614608785375" duration="3352000" />
-      <workItem from="1614775789421" duration="169000" />
+      <workItem from="1614775789421" duration="1314000" />
+      <workItem from="1619197387491" duration="84000" />
     </task>
     <servers />
   </component>
@@ -114,13 +115,17 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
+    <state x="1334" y="-772" key="#GOROOT" timestamp="1619197403325">
+      <screen x="721" y="-1417" width="3440" height="1417" />
+    </state>
+    <state x="1334" y="-772" key="#GOROOT/-1199.-1057.1920.1057/721.-1417.3440.1417/0.23.1792.1097@721.-1417.3440.1417" timestamp="1619197403325" />
     <state x="1340" y="-880" key="#Go_Modules" timestamp="1611671241347">
       <screen x="-180" y="-1440" width="3440" height="1440" />
     </state>
     <state x="1340" y="-880" key="#Go_Modules/-180.-1440.3440.1440/0.0.2048.1280@-180.-1440.3440.1440" timestamp="1611671241347" />
-    <state x="345" y="-1092" width="670" height="676" key="search.everywhere.popup" timestamp="1612521380174">
+    <state x="345" y="-1092" width="670" height="676" key="search.everywhere.popup" timestamp="1614776416432">
       <screen x="-180" y="-1417" width="3440" height="1417" />
     </state>
-    <state x="345" y="-1092" width="670" height="676" key="search.everywhere.popup/-180.-1417.3440.1417/0.23.2048.1257@-180.-1417.3440.1417" timestamp="1612521380174" />
+    <state x="345" y="-1092" width="670" height="676" key="search.everywhere.popup/-180.-1417.3440.1417/0.23.2048.1257@-180.-1417.3440.1417" timestamp="1614776416432" />
   </component>
 </project>

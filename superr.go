@@ -133,6 +133,7 @@ func ErrorWithLog(args ...interface{}) error {
 }
 
 func Log(e error) {
+
 	superError, ok := e.(*Error)
 	if !ok {
 		log.Error(e)
@@ -154,6 +155,9 @@ func Log(e error) {
 	entry := istance.With(fields...).WithOptions(zap.WithCaller(false))
 
 	errorMessage := string(superError.Message)
+	if len(errorMessage) == 0 {
+		errorMessage = firstError(superError).Error()
+	}
 	switch superError.Severity {
 	case SeverityDebug:
 		entry.Debug(errorMessage)
