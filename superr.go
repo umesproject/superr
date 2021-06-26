@@ -1,6 +1,7 @@
 package superr
 
 import (
+	"errors"
 	"fmt"
 	"github.com/jimlawless/whereami"
 	log "github.com/sirupsen/logrus"
@@ -102,7 +103,7 @@ type Error struct {
 func E(args ...interface{}) error {
 	e := &Error{}
 
-	e.Caller = whereami.WhereAmI(2)
+	e.Caller = whereami.WhereAmI(1)
 	e.Severity = SeverityInfo
 
 	for _, arg := range args {
@@ -155,9 +156,12 @@ func Log(e error) {
 	entry := istance.With(fields...).WithOptions(zap.WithCaller(false))
 
 	errorMessage := string(superError.Message)
+
 	if len(errorMessage) == 0 {
 		errorMessage = firstError(superError).Error()
 	}
+
+
 	switch superError.Severity {
 	case SeverityDebug:
 		entry.Debug(errorMessage)
@@ -205,13 +209,15 @@ func ErrorCode(err error) Kind {
 	if e.Kind != 0 {
 		return e.Kind
 	}
-
 	return ErrorCode(e.Err)
 }
 
-// Ops returns the "stack" of operations
-// for each generated error
 func firstError(e *Error) error {
+
+	if e.Err == nil {
+		return errors.New("no error message specified")
+	}
+
 	subErr, ok := e.Err.(*Error)
 	if !ok {
 		return e.Err
