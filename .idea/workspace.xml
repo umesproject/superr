@@ -24,7 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2ca3e8b7-1e8e-4c19-a9c4-37820e27db80" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/superr.go" beforeDir="false" afterPath="$PROJECT_DIR$/superr.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +69,12 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
@@ -92,7 +97,7 @@
       <workItem from="1619197387491" duration="144000" />
       <workItem from="1620393574563" duration="88000" />
       <workItem from="1624744924139" duration="513000" />
-      <workItem from="1624745533836" duration="72000" />
+      <workItem from="1624745533836" duration="2933000" />
     </task>
     <servers />
   </component>
@@ -122,9 +127,9 @@
       <screen x="721" y="-1417" width="3440" height="1417" />
     </state>
     <state x="1334" y="-772" key="#GOROOT/-1199.-1057.1920.1057/721.-1417.3440.1417/0.23.1792.1097@721.-1417.3440.1417" timestamp="1619197403325" />
-    <state x="689" y="291" width="670" height="676" key="search.everywhere.popup" timestamp="1624745594277">
+    <state x="689" y="291" width="670" height="676" key="search.everywhere.popup" timestamp="1624829360746">
       <screen x="0" y="0" width="2048" height="1280" />
     </state>
-    <state x="689" y="291" width="670" height="676" key="search.everywhere.popup/-1512.-1440.2560.1440/1048.-1440.3440.1440/0.0.2048.1280@0.0.2048.1280" timestamp="1624745594277" />
+    <state x="689" y="291" width="670" height="676" key="search.everywhere.popup/-1512.-1440.2560.1440/1048.-1440.3440.1440/0.0.2048.1280@0.0.2048.1280" timestamp="1624829360746" />
   </component>
 </project>

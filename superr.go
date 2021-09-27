@@ -3,6 +3,7 @@ package superr
 import (
 	"errors"
 	"fmt"
+
 	"github.com/jimlawless/whereami"
 	log "github.com/sirupsen/logrus"
 	"go.uber.org/zap"
@@ -103,7 +104,7 @@ type Error struct {
 func E(args ...interface{}) error {
 	e := &Error{}
 
-	e.Caller = whereami.WhereAmI(1)
+	e.Caller = whereami.WhereAmI(2)
 	e.Severity = SeverityInfo
 
 	for _, arg := range args {
@@ -160,7 +161,6 @@ func Log(e error) {
 	if len(errorMessage) == 0 {
 		errorMessage = firstError(superError).Error()
 	}
-
 
 	switch superError.Severity {
 	case SeverityDebug:
