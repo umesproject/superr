@@ -104,7 +104,7 @@ type Error struct {
 func E(args ...interface{}) error {
 	e := &Error{}
 
-	e.Caller = whereami.WhereAmI(2)
+	e.Caller = whereami.WhereAmI(3)
 	e.Severity = SeverityInfo
 
 	for _, arg := range args {
