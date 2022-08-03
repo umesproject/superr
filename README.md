@@ -2,6 +2,8 @@
 
 Superr is a structured error library for golang.
 
+Lib used on https://www.umes.io/
+
 It was inspirated by: https://middlemost.com/failure-is-your-domain/
 
 ### Getting started
